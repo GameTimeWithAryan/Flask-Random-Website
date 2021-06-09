@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link type="text/css" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="text-white bg-blue-600 body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                 stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+                 viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span class="ml-3 text-xl">Tailblocks</span>
+        </a>
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+            <a class="mr-5 hover:text-gray-900" href="/">Home</a>
+            <a class="mr-5 hover:text-gray-900" href="/content">Content</a>
+
+            {% if "name" not in session %}
+            <a class="mr-5 hover:text-gray-900" href="/login">Login</a>
+            <a class="mr-5 hover:text-gray-900" href="/signup">Sign Up</a>
+            {% endif %}
+
+            {% if "name" in session %}
+            <a class="mr-5 hover:text-gray-900" href="/user">User</a>
+            <a class="mr-5 hover:text-gray-900" href="/logout">Logout</a>
+            {% endif %}
+		
+	    {% if session["name"] == "admin" and session["email"] == "admin@gmail.com" %}
+            <a class="mr-5 hover:text-gray-900"></a>
+            <a class="mr-5 hover:text-gray-900">|</a>
+            <a class="mr-5 hover:text-gray-900" href="/view">View</a>
+            <a class="mr-5 hover:text-gray-900" href="/admin">Admin</a>
+            {% endif %}
+        </nav>
+    </div>
+
+</header>
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+
+<div class="bg-white p-4 flex items-center">
+
+    <div class="space-x-2 bg-blue-50 p-4 rounded flex items-start text-blue-600 shadow-lg mx-auto max-w-2xl">
+        <div class="text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-5 pt-1" viewBox="0 0 24 24">
+                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.5 5h3l-1 10h-1l-1-10zm1.5 14.25c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"/>
+            </svg>
+        </div>
+        <h3 class="text-blue-800 tracking-wider flex-1">
+            {{ msg }}
+        </h3>
+    </div>
+</div>
+
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-12 mx-auto">
+        <div class="flex flex-col text-center w-full mb-10">
+            <h2 class="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">Random Website</h2>
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-1 text-gray-900">
+                {% block heading %}{% endblock %}
+            </h1>
+        </div>
+
+        {% block content %}{% endblock %}
+    </div>
+</section>
+
+<script>
+    let form = document.getElementById('del_form')
+    form.addEventListener("submit", (event) => {
+        if (!confirm(msg)) {
+            event.preventDefault()
+        }
+    })
+</script>
+
+</body>
+</html>
