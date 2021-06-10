@@ -41,10 +41,15 @@ def signup():
         name = request.form["name"]
         email = request.form["email"]
 
-        found_user = Users.query.filter_by(name=name).first()
+        found_user_name = Users.query.filter_by(name=name).first()
+        found_user_email = Users.query.filter_by(email=email).first()
 
-        if found_user:
+        if found_user_name:
             flash("Name Already Taken")
+            redirect("signup")
+
+        elif found_user_email:
+            flash("Email Already Taken")
             redirect("signup")
         else:
             made_user = Users(name, email)
@@ -74,7 +79,6 @@ def login():
         if found_user:
             if found_user.name != name or found_user.email != email:
                 flash("Username Or Email Is Not Correct :(")
-
             else:
                 session["name"] = found_user.name
                 session["email"] = found_user.email
@@ -171,15 +175,6 @@ def admin():
         return redirect(url_for("login"))
 
 
-"""##### MISC #####"""
-
-
-@app.route("/view")
-def view():
-    found_user = Users.query.all()
-    return render_template("MISC/view.html", user_list=found_user)
-
-
 if __name__ == '__main__':
     db.create_all()
-    app.run(debug=True)
+    app.run()
