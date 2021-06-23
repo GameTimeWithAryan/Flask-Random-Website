@@ -46,11 +46,11 @@ def signup():
 
         if found_user_name:
             flash("Name Already Taken")
-            redirect("signup")
+            return redirect("signup")
 
         elif found_user_email:
             flash("Email Already Taken")
-            redirect("signup")
+            return redirect("signup")
         else:
             made_user = Users(name, email)
             db.session.add(made_user)
