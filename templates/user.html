@@ -3,7 +3,9 @@
 {% block heading %}User{% endblock %}
 
 {% block content%}
-<h1 class="lg:mx-36 leading-relaxed" style="font-size: x-large">User Info - </h1>
+
+<h1 class="lg:mx-36 lg:my-5 leading-relaxed" style="font-size: xx-large; font-weight: 500">Settings:</h1>
+<h2 class="lg:mx-36 lg:my-2 leading-relaxed" style="font-size: x-large; font-weight: 500">User Info - </h2>
 
 {% if session["name"] != "admin" and session["email"] != "admin@gmail.com" %}
 <p class="lg:mx-36 leading-relaxed text-base">To Change User Info, Type New Values In The Input Box Given And Hit Submit
@@ -11,20 +13,20 @@
 {% endif %}
 
 <form action="#" method="POST">
-    <h2 class="lg:mx-36 my-5 leading-relaxed" style="font-size: large">
+    <h3 class="lg:mx-36 my-5 leading-relaxed" style="font-size: large">
         {% if session["name"] != "admin" and session["email"] != "admin@gmail.com" %}
         1. Name: <input type="text" name="name" class="mx-2" value="{{ session['name'] }}">
         {% else %}
         Name: {{session["name"]}}
         {% endif %}
-    </h2>
-    <h2 class="lg:mx-36 my-5 leading-relaxed" style="font-size: large">
+    </h3>
+    <h3 class="lg:mx-36 my-5 leading-relaxed" style="font-size: large">
         {% if session["name"] != "admin" and session["email"] != "admin@gmail.com" %}
         2. Email: <input type="text" name="email" class="mx-3" value="{{ session['email'] }}">
         {% else %}
         Email: {{session["email"]}}
         {% endif %}
-    </h2>
+    </h3>
     {% if session["name"] != "admin" and session["email"] != "admin@gmail.com" %}
     <button name="submit"
             class="mx-36 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
@@ -34,7 +36,7 @@
 </form>
 
 {% if session["name"] != "admin" and session["email"] != "admin@gmail.com" %}
-<h1 class="lg:mx-36 mt-14 leading-relaxed" style="font-size: x-large">Delete Account - </h1>
+<h2 class="lg:mx-36 mt-14 mb-2 leading-relaxed" style="font-size: x-large; font-weight: 500">Delete Account - </h2>
 <p class="lg:mx-36 leading-relaxed text-base">To Delete Your Account, Click The Button Given Below</p>
 
 <form action="#" method="POST" id="del_form">
