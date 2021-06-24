@@ -37,7 +37,6 @@ def content():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
-
         name = request.form["name"]
         email = request.form["email"]
 
@@ -64,7 +63,6 @@ def signup():
         if "name" in session:
             flash("Already Signed In!")
             return redirect(url_for("home"))
-
         return render_template("signup.html")
 
 
@@ -73,16 +71,16 @@ def login():
     if request.method == "POST":
         name = request.form["name"]
         email = request.form["email"]
-
         found_user = Users.query.filter_by(name=name).first()
 
         if found_user:
             if found_user.name != name or found_user.email != email:
                 flash("Username Or Email Is Not Correct :(")
-            else:
-                session["name"] = found_user.name
-                session["email"] = found_user.email
-                flash("Successfully Logged In")
+                return redirect("login")
+
+            session["name"] = found_user.name
+            session["email"] = found_user.email
+            flash("Successfully Logged In")
             return redirect(url_for("user"))
         else:
             flash("Not Signed In :(")
@@ -138,7 +136,6 @@ def user():
             session.pop("email")
             flash("Account Successfully Deleted")
             return redirect(url_for("home"))
-
         return "Invalid Request :) Mr. Haxer 1337"
 
     else:
@@ -151,17 +148,14 @@ def user():
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     user_list = Users.query.all()
-
     if request.method == "POST":
         if "delete" in request.form:
-
             name = request.form["delete"]
             Users.query.filter_by(name=name).delete()
             db.session.commit()
 
             flash("Account Successfully Deleted!")
             return redirect(url_for("admin"))
-
         return "Invalid Request :) Mr. Haxer 1337"
 
     else:
@@ -170,7 +164,6 @@ def admin():
                 return render_template("admin.html", user_list=user_list)
             flash("Not An Admin")
             return redirect(url_for("home"))
-
         flash("Not Logged In!")
         return redirect(url_for("login"))
 
