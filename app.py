@@ -45,11 +45,11 @@ def signup():
 
         if found_user_name:
             flash("Name Already Taken")
-            return redirect("signup")
+            return redirect(url_for("signup"))
 
         elif found_user_email:
             flash("Email Already Taken")
-            return redirect("signup")
+            return redirect(url_for("signup"))
         else:
             made_user = Users(name, email)
             db.session.add(made_user)
@@ -76,7 +76,7 @@ def login():
         if found_user:
             if found_user.name != name or found_user.email != email:
                 flash("Username Or Email Is Not Correct :(")
-                return redirect("login")
+                return redirect(url_for("login"))
 
             session["name"] = found_user.name
             session["email"] = found_user.email
