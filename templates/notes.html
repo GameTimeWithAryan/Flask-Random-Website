@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Notes{% endblock %}
+{%block heading%}Notes{% endblock %}
+
+{% block content %}
+
+<div class="lg:mx-36 leading-relaxed">
+
+    <div>
+        <h1 class="lg:mt-5" style="font-size: xx-large">Add A Note</h1>
+        <p class="my-2" style="font-size: large">Click The Button Given Below To Add A Note</p>
+        <button class="my-2 text-white bg-green-600 border-0 py-2 px-6 focus:outline-none hover:bg-green-700 rounded text-lg">
+            <a href="/notes/add">Add Note</a></button>
+    </div>
+
+    <div>
+        <h1 class="lg:my-5" style="font-size: xx-large">Your Notes</h1>
+
+
+        <div class="mt-5 bg-gray-200 rounded px-8 py-5">
+            <p class="lg:my-1" style="font-size: large; font-weight: 700">Note Title</p>
+            <p>Note Description</p>
+            <p class="lg:my-3 mx-1 ;font-style: italic "> - By Aryan | 24 June, 2021</p>
+
+            <button class="my-1 mx-1 text-white bg-blue-600 border-0 py-2 px-4 focus:outline-none hover:bg-blue-700 rounded text-lg">
+                <a href="/notes/update">Update</a></button>
+
+            <button class="text-white bg-red-600 border-0 py-2 px-4 focus:outline-none hover:bg-red-700 rounded text-lg">
+                <a href="/notes/delete">Delete</a></button>
+        </div>
+
+        <div class="mt-5 bg-gray-200 rounded px-8 py-5">
+            <p class="lg:my-1" style="font-size: large; font-weight: 700">Note Title</p>
+            <p>Note Description</p>
+            <p class="lg:my-3 mx-1 ;font-style: italic "> - By Aryan | 24 June, 2021</p>
+
+            <button class="my-1 mx-1 text-white bg-blue-600 border-0 py-2 px-4 focus:outline-none hover:bg-blue-700 rounded text-lg">
+                <a href="/notes/update">Update</a></button>
+
+            <button class="text-white bg-red-600 border-0 py-2 px-4 focus:outline-none hover:bg-red-700 rounded text-lg">
+                <a href="/notes/delete">Delete</a></button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

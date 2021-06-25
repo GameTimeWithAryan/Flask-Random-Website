@@ -1,5 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash, session, request
 from flask_sqlalchemy import SQLAlchemy
+from datetime import date
+
 
 app = Flask(__name__)
 app.secret_key = "Secret Key"
@@ -68,6 +70,8 @@ def signup():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    session.permanent = True
+
     if request.method == "POST":
         name = request.form["name"]
         email = request.form["email"]
@@ -168,6 +172,35 @@ def admin():
         return redirect(url_for("login"))
 
 
+############### NOTES ###############
+
+@app.route("/notes/")
+def notes():
+    return render_template("notes.html")
+
+
+@app.route("/notes/add", methods=["GET", "POST"])
+def addNotes():
+    if request.method == "POST":
+        present_date = date.today()
+        note_date = present_date.strftime("%d %B %Y")
+        note_title = request.form["note_title"]
+        note_description = request.form["note_description"]
+
+        return redirect(url_for("addNotes"))
+    return render_template("add_notes.html")
+
+
+@app.route("/notes/update")
+def updateNotes():
+    return render_template("update_notes.html")
+
+
+@app.route("/notes/delete")
+def deleteNotes():
+    return "Delete"
+
+
 if __name__ == '__main__':
     db.create_all()
-    app.run()
+    app.run(debug=True)

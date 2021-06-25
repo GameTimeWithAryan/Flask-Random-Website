@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>Random Website - {% block title %}{% endblock %}</title>
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link type="text/css" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
@@ -28,6 +28,7 @@
             {% endif %}
 
             {% if "name" in session %}
+            <a class="mr-5 hover:text-gray-900" href="/notes">Notes</a>
             <a class="mr-5 hover:text-gray-900" href="/user">User</a>
             <a class="mr-5 hover:text-gray-900" href="/logout">Logout</a>
             {% endif %}
