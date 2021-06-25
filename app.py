@@ -176,7 +176,7 @@ def admin():
 
 @app.route("/notes/")
 def notes():
-    return render_template("notes.html")
+    return render_template("/notes/notes.html")
 
 
 @app.route("/notes/add", methods=["GET", "POST"])
@@ -188,12 +188,12 @@ def addNotes():
         note_description = request.form["note_description"]
 
         return redirect(url_for("addNotes"))
-    return render_template("add_notes.html")
+    return render_template("notes/add_notes.html")
 
 
 @app.route("/notes/update")
 def updateNotes():
-    return render_template("update_notes.html")
+    return render_template("notes/update_notes.html")
 
 
 @app.route("/notes/delete")
