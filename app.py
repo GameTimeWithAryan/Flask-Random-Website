@@ -2,7 +2,6 @@ from flask import Flask, render_template, redirect, url_for, flash, session, req
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 
-
 app = Flask(__name__)
 app.secret_key = "Secret Key"
 
@@ -202,5 +201,6 @@ def deleteNotes():
 
 
 if __name__ == '__main__':
-    db.create_all()
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
